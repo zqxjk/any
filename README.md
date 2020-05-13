@@ -14,7 +14,7 @@ push  crackme.40217E
 call  <crackme.sub_4013D8>
 add   esp,4
 pop   eax
-cmp   eax,ebx                 # Здесь сравнение двух выражений, EAX - из имени EBX - из ключа
+cmp   eax,ebx                 # Здесь сравнение двух регистров, EAX - из имени EBX - из ключа
 je    crackme.40124C          # Если ZF поднят, то прыгаем 0x0040124C
 call  <crackme.sub_401362>    # Эта функция сообщит о неудаче
 jmp   crackme.4011E6            
