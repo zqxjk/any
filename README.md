@@ -26,3 +26,46 @@ jmp   crackme.4011E6
 
 
 Генерация ключа не составляет особых усилий, так как `0x1234 + name + 0x5678 = 0x1234 + key + 0x1234 = 0 + key = key`, в силу коммутативности и ассоциативности опреации сложения по модулю 2. 
+
+Перевод строки в верхний регистр производится так 
+```assembly
+mov esi,dword ptr ss:[esp+4]
+push esi
+mov al,byte ptr ds:[esi]
+test al,al
+je crackme.40139C
+cmp al,41
+jb crackme.4013AC
+cmp al,5A
+jae crackme.401394
+inc esi
+jmp crackme.401383
+call <crackme.sub_4013D2>
+inc esi
+jmp crackme.401383
+pop esi
+call <crackme.sub_4013C2>
+xor edi,5678
+mov eax,edi
+
+```
+
+Серийный ключ представляет собой некоторую строку ниже превращает её в число по основанию 16 (умножая на 0xA старший разряд и добавляя следующий пока символы не кончатся)
+
+```assembly
+xor eax,eax
+xor edi,edi
+xor ebx,ebx
+mov esi,dword ptr ss:[esp+4]
+mov al,A
+mov bl,byte ptr ds:[esi]
+test bl,bl
+je crackme.4013F5
+sub bl,30
+imul edi,eax
+add edi,ebx
+inc esi
+jmp crackme.4013E2
+xor edi,1234
+mov ebx,edi
+```
