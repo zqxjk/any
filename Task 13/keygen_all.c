@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
 				}
 			}
 			else{
-				printf("Incorrect symbols in name\n", );
+				printf("Incorrect symbols in name\n");
 				NAME_IS_CORRECT = 0;
 				break;
 			}
